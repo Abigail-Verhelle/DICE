@@ -1,6 +1,7 @@
 package com.example.dice;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     /*private static String TextView = "";
     private static String TextView2 = "";*/
+    private MediaPlayer roll;
+    private MediaPlayer CH;
+    private MediaPlayer CM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
                 rolldice();
             }
         });
+
+        roll = MediaPlayer.create(MainActivity.this,R.raw.rolling);
+        CH = MediaPlayer.create(MainActivity.this,R.raw.ch);
+        CM = MediaPlayer.create(MainActivity.this,R.raw.cms);
     }
 
     private ImageView imageViewdice;
@@ -35,12 +43,15 @@ public class MainActivity extends AppCompatActivity {
     private void rolldice(){
         int randomNumber =  rng.nextInt( 20) + 1;
 
+        roll.start();
+
         switch(randomNumber){
 
 
             case 1:
                 imageViewdice.setImageResource(R.drawable.smile1);
                 /*TextView.setVisibility(View.VISIBLE);*/
+                CM.start();
                 break;
 
             case 2:
@@ -118,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             case 20:
                 imageViewdice.setImageResource(R.drawable.smile20);
                 /* TextView2.setVisibility(View.VISIBLE);*/
+                CH.start();
                 break;
 
 
